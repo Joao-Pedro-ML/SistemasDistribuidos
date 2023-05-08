@@ -10,9 +10,12 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServidorImpl implements IMensagem{
     
+	private static final Logger logger = Logger.getLogger(ServidorImpl.class.getName());
 	ArrayList<Peer> alocados;
 	
     public ServidorImpl() {
@@ -25,12 +28,12 @@ public class ServidorImpl implements IMensagem{
     public Mensagem enviar(Mensagem mensagem) throws RemoteException {
         Mensagem resposta;
         try {
-        	System.out.println("Mensagem recebida: " + mensagem.getMensagem());
-			resposta = new Mensagem(parserJSON(mensagem.getMensagem()));
-		} catch (Exception e) {
-			e.printStackTrace();
-			resposta = new Mensagem("{\n" + "\"result\": false\n" + "}");
-		}
+            logger.log(Level.INFO, "Mensagem recebida: {0}", mensagem.getMensagem());
+            resposta = new Mensagem(parserJSON(mensagem.getMensagem()));
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Erro ao processar mensagem: {0}", e.getMessage());
+            resposta = new Mensagem("{\n" + "\"result\": false\n" + "}");
+        }
         return resposta;
     }    
     
@@ -125,3 +128,4 @@ public class ServidorImpl implements IMensagem{
         servidor.iniciar();
     }    
 }
+
