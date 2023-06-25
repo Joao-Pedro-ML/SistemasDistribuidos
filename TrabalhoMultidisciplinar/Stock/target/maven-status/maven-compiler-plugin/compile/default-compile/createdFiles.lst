@@ -1,0 +1,9 @@
+br/stock/StockRMI.class
+br/stock/Stock.class
+br/stock/StockRMIClient.class
+br/stock/StockWebService.class
+br/stock/StockRMIClient$1.class
+br/stock/StockRMIServer.class
+br/stock/StockRMIClient$2.class
+br/stock/StockWebServicePublisher.class
+br/stock/StockService.class
